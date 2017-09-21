@@ -18,7 +18,7 @@
 		<div class="navbar-inner" id="nav-inner">
 			<div class="menuBar row-fluid">
 				{* overflow+height is required to avoid flickering UI due to responsive handling, overflow will be dropped later *}
-				<div class="span9">
+				<div class="span8">
 					<ul class="nav modulesList" id="largeNav">
 						<li class="tabs">
 							<a class="alignMiddle {if $MODULE eq 'Home'} selected {/if}" href="{$HOME_MODULE_MODEL->getDefaultUrl()}"><img src="{vimage_path('home.png')}" alt="{vtranslate('LBL_HOME',$moduleName)}" title="{vtranslate('LBL_HOME',$moduleName)}" /></a>
@@ -124,9 +124,71 @@
 						</li>
 					</ul>
 				</div>
-				<div class="span3 marginLeftZero pull-right" id="headerLinks">
+
+				
+				<!-- {php} echo $combo;  {/php}
+				<select class="chzn-select chzn-done" id="basicSearchModulesList" style="width: 150px;">
+					<option value="" class="globalSearch_module_All">All Records</option>
+					{php} echo count($data); foreach($data as $val): {/php}
+						<option value="23" class="globalSearch_module_All">tets</option>			
+					{php} endforeach; {/php}
+				</select> -->
+
+
+				<!-- <select class="chzn-select chzn-done" id="basicSearchModulesList" style="width: 150px;">
+					<option value="" class="globalSearch_module_All">All Records</option>
+					<option value="Contacts" class="globalSearch_module_Contacts">Borrowers</option><option value="Accounts" class="globalSearch_module_Accounts">Organizations</option><option value="Documents" class="globalSearch_module_Documents">Documents</option>
+				</select> -->
+
+
+				<div class="span4 marginLeftZero pull-right" id="headerLinks">
+					<!-- Status Update -->
+					{php}
+						include('own_config.php');
+						session_start();
+						$id= $_SESSION['authenticated_user_id'];
+						
+						$usersResult = $mysqli->query(
+									"select vtiger_users.*, b.* from `vtiger_users` 
+     								  Join `vtiger_user2role` AS b on vtiger_users.id = b.userid where vtiger_users.id = $id limit 1") or die(mysql_error());
+
+ 						$row1 = mysqli_fetch_array($usersResult);
+						 
+						$status_id = $row1['user_status'];						
+						$status_val = $row1['user_status_val'];						
+						$roleid = $row1['roleid'];
+						$active= '';
+						if(isset($_SESSION['authenticated_user_status'])){
+							$active= 'yes';
+						}
+
+						if($roleid == 'H9'){
+							$data = array();
+							$result = $mysqli->query("select * from vtiger_user_status");
+							$data = array();
+							$i = 1;
+							$combo = '<select class="chzn-select chzn-done" id="onlineStatusUpdate" style="width: 150px; margin: 0;">';
+
+							while($row = mysqli_fetch_array($result)) 
+							{ 
+								$data[$i]['name'] = $row['status'];
+								$name = $row['status'];
+								$data[$i]['id'] = $row['statusid'];
+								$id = $row['statusid'];	
+								if( (($status_id.'#'.$status_val) == ($id.'#'.$name)) && !empty($active)  ){
+									$combo .= '<option value="'.$id.'#'.$name.'" selected>'.$name.'</option>';
+								}else{
+									$combo .= '<option value="'.$id.'#'.$name.'">'.$name.'</option>';
+								}
+								
+								$i++;							
+							}
+							$combo .= '</select>';
+							echo $combo;
+						}						
+					{/php}
 					<span id="headerLinksBig" class="pull-right headerLinksContainer">
-						<span class="dropdown span settingIcons">
+						<!-- <span class="dropdown span settingIcons">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 								<img src="{vimage_path('theme_brush.png')}" alt="theme roller" title="Theme Roller" />
 							</a>
@@ -149,7 +211,8 @@
 								</div>
 								<div id="progressDiv"></div>
 							</ul>
-						</span>
+						</span> -->
+
 						{foreach key=index item=obj from=$HEADER_LINKS}
 							{assign var="src" value=$obj->getIconPath()}
 							{assign var="icon" value=$obj->getIcon()}
@@ -157,7 +220,9 @@
 							{assign var="childLinks" value=$obj->getChildLinks()}
 							<span class="dropdown span{if !empty($src)} settingIcons {/if}">
 								{if !empty($src)}
+									{if $title != 'LBL_FEEDBACK'}
 									<a id="menubar_item_right_{$title}" class="dropdown-toggle" data-toggle="dropdown" href="#"><img src="{$src}" alt="{vtranslate($title,$MODULE)}" title="{vtranslate($title,$MODULE)}" /></a>
+									{/if}
 									{else}
 										{assign var=title value=$USER_MODEL->get('first_name')}
 										{if empty($title)}
@@ -258,3 +323,28 @@
 	<input type="hidden" value="{$PARENT_MODULE}" id="parent" name='parent' />
 	<input type='hidden' value="{$VIEW}" id='view' name='view'/>
 {/strip}
+
+
+<script type="text/javascript">
+$("#onlineStatusUpdate").on('change', function() {
+	var status = $(this).val();
+	updateStatus(status);
+});
+var active = "{php} echo $_SESSION['authenticated_user_status']; {/php}";
+if(!active){
+	var status = $('#onlineStatusUpdate').val();
+	updateStatus(status);
+}
+function updateStatus(status){
+	$.ajax({
+	   type:'POST',
+	   url:'api/status_update.php',
+	   data:"status="+status,
+	   success: function(data) {
+	   	if(data != 'Error!!'){	   		
+	      alert(data)
+	   	}
+	   }
+	});
+}
+</script>

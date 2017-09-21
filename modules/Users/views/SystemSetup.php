@@ -14,18 +14,18 @@ class Users_SystemSetup_View extends Vtiger_Index_View {
 		return true;
 	}
 	
-	public function process(Vtiger_Request $request) {
-		$moduleName = $request->getModule();
-		$viewer = $this->getViewer($request);
-		$userModel = Users_Record_Model::getCurrentUserModel();
-		$isFirstUser = Users_CRMSetup::isFirstUser($userModel);
-		
-		if($isFirstUser) {
-			$viewer->assign('IS_FIRST_USER', $isFirstUser);
-			$viewer->assign('PACKAGES_LIST', Users_CRMSetup::getPackagesList());
-			$viewer->view('SystemSetup.tpl', $moduleName);
+	public function process(vtiger_request $request) {
+		$modulename = $request->getmodule();
+		$viewer = $this->getviewer($request);
+		$usermodel = users_record_model::getcurrentusermodel();
+		$isfirstuser = users_crmsetup::isfirstuser($usermodel);
+
+		if($isfirstuser) {
+			$viewer->assign('is_first_user', $isfirstuser);
+			$viewer->assign('packages_list', users_crmsetup::getpackageslist());
+			$viewer->view('systemsetup.tpl', $modulename);
 		} else {
-			header ('Location: index.php?module=Users&parent=Settings&view=UserSetup');
+			header ('location: index.php');
 			exit();
 		}
 	}

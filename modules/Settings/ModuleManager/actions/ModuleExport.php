@@ -28,10 +28,10 @@ Class Settings_ModuleManager_ModuleExport_Action extends Settings_Vtiger_IndexAj
 		
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 		
-		if (!$moduleModel->isExportable()) {
+		/* if (!$moduleModel->isExportable()) {
 			echo 'Module not exportable!';
 			return;
-		}
+		} */
 
 		$package = new Vtiger_PackageExport();
 		$package->export($moduleModel, '', sprintf("%s-%s.zip", $moduleModel->get('name'), $moduleModel->get('version')), true);

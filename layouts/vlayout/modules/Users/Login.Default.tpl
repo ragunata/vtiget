@@ -46,20 +46,25 @@
 					</div>
 				</div>
 				<div class="span9">
-					<div class="helpLinks">
-						<a href="https://www.vtiger.com">Vtiger Website</a> | 
+					<!-- <div class="helpLinks">
+						<a href="https://www.vtiger.com">` Website</a> | 
 						<a href="https://wiki.vtiger.com/vtiger6/">Vtiger Wiki</a> | 
 						<a href="https://www.vtiger.com/crm/videos/">Vtiger videos </a> | 
 						<a href="https://discussions.vtiger.com/">Vtiger Forums</a> 
-					</div>
+					</div> 
+					<div class="helpLinks sign-up" id="forgotPassword">
+						<p class="color-white">Not a customer?</p>
+						<button type="submit" class="btn btn-primary sbutton">Sign Up</button>
+					</div> -->
 				</div>
+				
 			</div>
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="content-wrapper">
 						<div class="container-fluid">
 							<div class="row-fluid">
-								<div class="span6">
+								<!-- <div class="span6">
 									<div class="carousal-container">
 										<div><h2> Get more out of Vtiger </h2></div>
 										<ul class="bxslider">
@@ -95,12 +100,12 @@
 											</li>
 										</ul>
 									</div>
-								</div>
-								<div class="span6">
-									<div class="login-area">
-										<div class="login-box" id="loginDiv">
+								</div> -->
+								<div class="offset4 span4">
+									<div class="">
+										<div class="" id="loginDiv">
 											<div class="">
-												<h3 class="login-header">Login to Vtiger CRM</h3>
+												<h3 class="color-white">PTPK CRM Login</h3>
 		</div>
 											<form class="form-horizontal login-form" style="margin:0;" action="index.php?module=Users&action=Login" method="POST">
 			{if isset($smarty.request.error)}
@@ -124,30 +129,36 @@
 													</div>
 												{/if}
 												<div class="control-group">
-													<label class="control-label" for="username"><b>User name</b></label>
-													<div class="controls">
-														<input type="text" id="username" name="username" placeholder="Username" value="admin">
+													<!-- <label class="control-label" for="username"><b>User name</b></label> -->
+													<div class="ptpk-sec-username">
+														<input type="text" id="username" class="form-control" name="username" placeholder="Username" value="admin">
 													</div>
 												</div>
 
 			<div class="control-group">
-													<label class="control-label" for="password"><b>Password</b></label>
-				<div class="controls">
-														<input type="password" id="password" name="password" placeholder="Password" value="admin">
+													<!-- <label class="control-label" for="password"><b>Password</b></label> -->
+													<div class="ptpk-sec-password">
+														<input type="password" class="form-control" id="password" name="password" placeholder="Password" value="admin">
+														
+														<div class="control-group">
+															<div class="" id="forgotPassword">												
+																<a href="javascript:void(0)" id="forgotPassword">?</a>
+															</div>
+														</div>
 													</div>
 												</div>
 												<div class="control-group signin-button">
-													<div class="controls" id="forgotPassword">
-														<button type="submit" class="btn btn-primary sbutton">Sign in</button>
-														&nbsp;&nbsp;&nbsp;<a>Forgot Password ?</a>
+													<div class="" id="forgotPassword">
+														<button type="submit" class="btn btn-primary btn-block sbutton">Login</button>
+														<!-- &nbsp;&nbsp;&nbsp;<a>Forgot Password ?</a> -->
 													</div>
 												</div>
 												{* Retain this tracker to help us get usage details *}
 												<img src='//stats.vtiger.com/stats.php?uid={$APPUNIQUEKEY}&v={$CURRENT_VERSION}&type=U' alt='' title='' border=0 width='1px' height='1px'>
 											</form>
-											<div class="login-subscript">
+											<!-- <div class="login-subscript">
 												<small> Powered by vtiger CRM {$CURRENT_VERSION}</small>
-											</div>
+											</div> -->
 				</div>
 										
 										<div class="login-box hide" id="forgotPasswordDiv">
@@ -185,10 +196,14 @@
 			</div>
 		</div>
 		<div class="navbar navbar-fixed-bottom">
-			<div class="navbar-inner">
+			<div class="navbar-inner bg-blue text-center">
 				<div class="container-fluid">
-					<div class="row-fluid">
-						<div class="span6 pull-left" >
+					<div class="row-fluid ">
+						<div class="span12">
+							<p class="color-white footer-txt">&copy; PTPK 2017 | Skills Development Fund Corporation, Kula Lumpur, Malaysia.</p>
+
+						</div>
+						<!-- <div class="span6 pull-left" >
 							<div class="footer-content">
 								<small>&#169 2004-{date('Y')}&nbsp;
 									<a href="https://www.vtiger.com"> vtiger.com</a> | 
@@ -204,7 +219,7 @@
 								&nbsp;<a href="https://www.linkedin.com/company/vtiger-systems-india-pvt-ltd"><img src="layouts/vlayout/skins/images/linkedin.png"></a>
 								&nbsp;<a href="http://www.youtube.com/user/vtigercrm"><img src="layouts/vlayout/skins/images/youtube.png"></a> 
 							</div>
-						</div>
+						</div> -->
 					</div>   
 				</div>    
 			</div>   

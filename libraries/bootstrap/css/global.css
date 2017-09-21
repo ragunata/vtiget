@@ -1,0 +1,20 @@
+/*!
+ * PTPK Custom Styles
+ */
+
+ #loginDiv{text-align:center;}
+ .form-control{ display:inline-block; width:100%;}
+ #loginDiv .form-control{ display:inline-block; width:90%; padding:10px 20px; border-radius:12px;}
+ .color-white{color:#fff;}
+ .ptpk-sec-password{ position:relative;}
+ .ptpk-sec-password a{position: absolute;top: 5px; right:15px; color: #08a5ff;border: 1px solid #08a5ff;padding: 5px 12px;}
+ .btn-block{display:block; width: 100% !important;}
+ .btn-block.sbutton{padding:10px 20px;}
+ .bg-blue{ background:#002592 !important;}
+ .text-center{text-align:center;}
+ .footer-txt{margin:0px;padding: 10px 0;}
+ .helpLinks.sign-up{ background:transparent !important; border:none !important; box-shadow:none ;}
+ .helpLinks.sign-up button{padding: 10px 25px; background: transparent; border:1px solid #0aa0fb;margin-left:10px;}
+ .sign-up > *{ display: inline-block;}
+ .sign-up .sbutton{ width: inherit !important;}
+

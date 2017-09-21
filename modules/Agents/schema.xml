@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<schema>
+	<tables>
+		<table>
+			<name>vtiger_agents</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_agents` (`agentsid` int(11) default NULL, `agentsno` varchar(100) default NULL, `agents_tks_name` varchar(16) default NULL ,`agents_tks_age` varchar(88) default NULL   , PRIMARY KEY (`agentsid`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+		</table>
+		<table>
+			<name>vtiger_agentscf</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_agentscf` (`agentsid` int(11) NOT NULL, PRIMARY KEY (`agentsid`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+		</table>
+	</tables>
+</schema>

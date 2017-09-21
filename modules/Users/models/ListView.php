@@ -54,9 +54,26 @@ class Users_ListView_Model extends Vtiger_ListView_Model {
     public function getQuery() {
             $listQuery = parent::getQuery();
         //remove the status active condition since in users list view we need to consider inactive users as well
-        $listQueryComponents = explode(" WHERE vtiger_users.status='Active' AND",$listQuery);
-                $listQuery = implode(' WHERE ', $listQueryComponents);
-            return $listQuery;
+        $currentUser = Users_Record_Model::getCurrentUserModel();
+		$curid=$currentUser->get('id');
+		$cur_user_role=$currentUser->get('roleid');
+
+        $sub = getSubordinateRoleAndUsers($cur_user_role);
+		$subRoles = array($roleid);
+		$subRoles = array_merge($subRoles, array_keys($sub));
+
+		$roleids = array();
+		foreach($subRoles as $role){
+			if($role){
+				$roleids[] = "'".$role."'";
+			}			
+		}
+		
+		$roleids = implode(',', $roleids );
+
+        $listQueryComponents = explode(" WHERE vtiger_users.status='Active' AND",$listQuery. ' AND roleid IN ('. $roleids. ')');
+        $listQuery = implode(' WHERE ', $listQueryComponents);
+        return $listQuery;
     }
 
 	/**

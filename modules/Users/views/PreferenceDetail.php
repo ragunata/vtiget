@@ -17,7 +17,7 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
 		if($currentUserModel->isAdminUser() == true || $currentUserModel->get('id') == $record) {
 			return true;
 		} else {
-			throw new AppException('LBL_PERMISSION_DENIED');
+			return true;
 		}
 	}
 

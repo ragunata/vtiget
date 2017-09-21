@@ -44,9 +44,14 @@ class Users_Detail_View extends Users_PreferenceDetail_View {
 			$selectedMenu = $menuModels[$firstKey];
 		}
 
+		$currentUser = Users_Record_Model::getCurrentUserModel();
+		$curid= $currentUser->get('id');
+		$cur_user_role= $currentUser->get('roleid');
+
 		$viewer->assign('SELECTED_FIELDID',$fieldId);
 		$viewer->assign('SELECTED_MENU', $selectedMenu);
 		$viewer->assign('SETTINGS_MENUS', $menuModels);
+		$viewer->assign('USER_ROLE', $cur_user_role);
 		$viewer->assign('MODULE', $moduleName);
 		$viewer->assign('QUALIFIED_MODULE', $qualifiedModuleName);
         $viewer->assign('LOAD_OLD', Settings_Vtiger_Index_View::$loadOlderSettingUi);

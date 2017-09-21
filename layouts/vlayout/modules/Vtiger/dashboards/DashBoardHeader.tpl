@@ -17,7 +17,7 @@
                     <h2 class="pull-left">{$DASHBOARDHEADER_TITLE}</h2>
             {/if}
         </div>
-        <div class="span9">
+        <!-- <div class="span9">
             <div class="pull-right">
                 <div class="btn-toolbar">
                     <span class="btn-group">
@@ -67,6 +67,6 @@
                     </span>
                 </div>
               </div>
-         </div>
+         </div> -->
     </div>
 </div>
